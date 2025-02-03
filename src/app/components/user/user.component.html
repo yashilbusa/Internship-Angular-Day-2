@@ -1,0 +1,31 @@
+<p>user works!</p>
+
+<hr>
+
+<h2>Directive : ngFor and ngIf</h2>
+<div *ngFor="let i of users"> <!-- For Direct We import the CommonModule in First-learn Component-->  
+        <p *ngIf="i.salary>7000;else elseblock">Name - {{i.name}} , Status - {{i.isSingle?"Single":"Married"}} , Salary - {{i.salary}}</p>  
+    <ng-template #elseblock>
+        <p>Name - {{i.name}} , Status - {{i.isSingle?"Single":"Married"}} , Salary - Hidden</p>  
+    </ng-template>
+</div>
+
+<br>
+<hr>
+
+<h2>Directive : ngFor With Trackby </h2>
+<li *ngFor="let i of items; trackBy: trackByFn">{{ i.name }}</li>
+
+<br>
+<hr>
+
+<h2>Directive : ngSwitch</h2>
+<span [ngSwitch]="age">
+<p *ngSwitchCase="18">You are 18 Years Old</p>
+<p *ngSwitchCase="19">You are 19 Years Old</p>
+<p *ngSwitchCase="21">You are 21 Years Old</p>
+<p *ngSwitchDefault>It Seems I Don't know Your age</p>
+</span>
+
+
+
