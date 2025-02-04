@@ -5,11 +5,13 @@ import { JokeComponent } from './components/joke/joke.component';
 import { fromEvent, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators'
+import { UserService } from './services/user.service';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [CommonModule ],
   // imports: [UserComponent,JokeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -55,6 +57,8 @@ export class AppComponent {
       //   error:(err)=>console.log(err.message),
       //   complete:()=>console.log("I am Done Eating Pizzas")
       // })
-
     }
+    user = this.userservice.getUser()
+    constructor(private userservice: UserService) { }
+
 }

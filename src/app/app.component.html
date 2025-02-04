@@ -3,3 +3,10 @@
 <app-joke></app-joke> -->
 
 <input type="text" #search >
+
+<h2>Async Pipe</h2>
+
+<div *ngIf ="user | async as user ">
+    <p>Name - {{ user.name }}</p>
+    <p>Email - {{ user.email }}</p>
+</div>
