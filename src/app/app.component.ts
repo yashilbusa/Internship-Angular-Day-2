@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 // import { RouterOutlet } from '@angular/router';
 import { UserComponent } from './components/user/user.component';
 import { JokeComponent } from './components/joke/joke.component';
+import { fromEvent, of } from 'rxjs';
 import { Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-root',
@@ -14,18 +16,45 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
 
+    @ViewChild('search',{static:true}) 
+    search?:ElementRef<HTMLInputElement>
+
     ngOnInit() {
+
+     const searchobj =  fromEvent(this.search!.nativeElement,"input")
+     .pipe(
+      map((input:any)=>input.target.value)
+     )
       
+     searchobj.subscribe(
+      (value)=>console.log(value)
+     )
+      
+
+      const numbers = of(1, 2, 3, 4, 5);
+      const evenNumbers = numbers.pipe(filter((x) => x % 2 !== 0));
+      // evenNumbers.subscribe((x)=>console.log(x))
+
       const pizzaObservable = new Observable((subscriber)=>{
-        subscriber.next({name:"Farm House",value:"true"})
-        subscriber.next({name:"Margherita",value:"true"})
-        subscriber.next({name:"7-Cheese",value:"true"})
+        subscriber.next({name:"7-Cheese",veg:true,size:"small"})
+        subscriber.next({name:"Margherita",veg:true,size:"large"})
+        subscriber.next({name:"Non Veg Pizza",veg:false,size:"medium"})
+        subscriber.complete()
+      }).pipe(
+        tap((pizza:any)=>{
+          if(pizza.size === "medium"){
+            throw new Error("Medium Size Pizza Not Available");
+          }
+        }),
+        filter((pizza:any)=>pizza.veg === true),
+        map((pizza:any)=>pizza.name)
+      )
 
-      })
-
-      pizzaObservable.subscribe({
-        next:(value)=>console.log(value)
-      })
+      // pizzaObservable.subscribe({
+      //   next:(value)=>console.log(`Pizza : ${value}`),
+      //   error:(err)=>console.log(err.message),
+      //   complete:()=>console.log("I am Done Eating Pizzas")
+      // })
 
     }
 }
