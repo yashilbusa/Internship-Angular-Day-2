@@ -20,7 +20,7 @@
 
 <h2>Using Custom Pipe, Sort With Respect to Salary in Ascending Order</h2>
 <div>
-    <li *ngFor="let i of users | sortPipe ">
+    <li *ngFor="let i of users | sortPipe ;  trackBy: trackById">
         Salary - {{ i.salary }}
     </li>
 </div>
@@ -34,5 +34,6 @@
     </li>
 </div>
 
-
+<hr>
+<app-data></app-data>
 

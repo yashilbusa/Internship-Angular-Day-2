@@ -9,12 +9,13 @@ import { UserService } from './services/user.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { SortPipePipe } from "./pipes/sort-pipe.pipe";
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { DataComponent } from './components/data/data.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SortPipePipe, FilterPipePipe],
-  // imports: [UserComponent,JokeComponent],
+  imports: [CommonModule, SortPipePipe, FilterPipePipe,DataComponent],
+  // imports: [UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -71,4 +72,8 @@ export class AppComponent {
       {id:6,name:"Kishan",salary:4000},
       {id:7,name:"Ujas",salary:2000}
     ]
+
+    trackById(index:number, i:any){
+      return i.id;
+    }
 }

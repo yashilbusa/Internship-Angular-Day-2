@@ -7,6 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipePipe implements PipeTransform {
 
   transform(users :any) {
-    return users.filter((i:any)=>i.name.toUpperCase());
+    return users.filter((i:any)=>i.name = i.name.toUpperCase());
   }
 }
