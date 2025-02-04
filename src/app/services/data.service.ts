@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  private url = 'https://jsonplaceholder.typicode.com/posts/1'; 
+  private url = 'https://jsonplaceholder.typicode.com/posts/2'; 
 
   getPosts(): Observable<any> {
     return this.http.get(this.url);
