@@ -7,11 +7,13 @@ import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators'
 import { UserService } from './services/user.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { SortPipePipe } from "./pipes/sort-pipe.pipe";
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule ],
+  imports: [CommonModule, SortPipePipe, FilterPipePipe],
   // imports: [UserComponent,JokeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

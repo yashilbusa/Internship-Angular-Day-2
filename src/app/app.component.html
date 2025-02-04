@@ -17,3 +17,22 @@
 }
 
 <hr>
+
+<h2>Using Custom Pipe, Sort With Respect to Salary in Ascending Order</h2>
+<div>
+    <li *ngFor="let i of users | sortPipe ">
+        Salary - {{ i.salary }}
+    </li>
+</div>
+
+<hr>
+
+<h2>Using Custom Pipe, Filter Doing Name in Uppercase</h2>
+<div>
+    <li *ngFor="let i of users | filterPipe ">
+        Name - {{ i.name }}
+    </li>
+</div>
+
+
+
