@@ -5,6 +5,7 @@ import { JokeComponent } from './components/joke/joke.component';
 import { fromEvent, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators'
+import { ajax } from 'rxjs/ajax';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { SortPipePipe } from "./pipes/sort-pipe.pipe";
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
@@ -22,47 +23,44 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
 
-    // @ViewChild('search',{static:true}) 
-    // search?:ElementRef<HTMLInputElement>
+    @ViewChild('search',{static:true}) 
+    search?:ElementRef<HTMLInputElement>
 
-    // ngOnInit() {
+    ngOnInit() {
 
-    //  const searchobj =  fromEvent(this.search!.nativeElement,"input")
-    //  .pipe(
-    //   map((input:any)=>input.target.value)
-    //  )
+     const searchobj =  fromEvent(this.search!.nativeElement,"change")
+     .pipe(
+      map((input:any)=>{
+        return ajax(`https://api.github.com/search/users?q=${input.target.value}`)
+      })
+     )
+     searchobj.subscribe((value:any)=>console.log(value))
       
-    //  searchobj.subscribe(
-    //   (value)=>console.log(value)
-    //  )
-      
-    //   const numbers = of(1, 2, 3, 4, 5);
-    //   const evenNumbers = numbers.pipe(filter((x) => x % 2 !== 0));
-    //   // evenNumbers.subscribe((x)=>console.log(x))
+      // const numbers = of(1, 2, 3, 4, 5);
+      // const evenNumbers = numbers.pipe(filter((x) => x % 2 !== 0));
+      // evenNumbers.subscribe((x)=>console.log(x))
 
-    //   const pizzaObservable = new Observable((subscriber)=>{
-    //     subscriber.next({name:"7-Cheese",veg:true,size:"small"})
-    //     subscriber.next({name:"Margherita",veg:true,size:"large"})
-    //     subscriber.next({name:"Non Veg Pizza",veg:false,size:"medium"})
-    //     subscriber.complete()
-    //   }).pipe(
-    //     tap((pizza:any)=>{
-    //       if(pizza.size === "medium"){
-    //         throw new Error("Medium Size Pizza Not Available");
-    //       }
-    //     }),
-    //     filter((pizza:any)=>pizza.veg === true),
-    //     map((pizza:any)=>pizza.name)
-    //   )
+      // const pizzaObservable = new Observable((subscriber)=>{
+      //   subscriber.next({name:"7-Cheese",veg:true,size:"small"})
+      //   subscriber.next({name:"Margherita",veg:true,size:"large"})
+      //   subscriber.next({name:"Non Veg Pizza",veg:false,size:"medium"})
+      //   subscriber.complete()
+      // }).pipe(
+      //   tap((pizza:any)=>{
+      //     if(pizza.size === "medium"){
+      //       throw new Error("Medium Size Pizza Not Available");
+      //     }
+      //   }),
+      //   filter((pizza:any)=>pizza.veg === true),
+      //   map((pizza:any)=>pizza.name)
+      // )
 
-    //   // pizzaObservable.subscribe({
-    //   //   next:(value)=>console.log(`Pizza : ${value}`),
-    //   //   error:(err)=>console.log(err.message),
-    //   //   complete:()=>console.log("I am Done Eating Pizzas")
-    //   // })
-    // }
-    // user = this.userservice.getUser()
-    // constructor(private userservice: UserService) { }
+      // pizzaObservable.subscribe({
+      //   next:(value)=>console.log(`Pizza : ${value}`),
+      //   error:(err)=>console.log(err.message),
+      //   complete:()=>console.log("I am Done Eating Pizzas")
+      // })
+    }
 
     users = [
       {id:1,name:"Yashil",salary:8000},
