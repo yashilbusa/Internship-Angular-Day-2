@@ -13,7 +13,7 @@ export class DataComponent {
 
   constructor(private dataservice: DataService) { }
 
-  data =""
+  data = ""
 
   ngOnInit() {
     this.getData()
