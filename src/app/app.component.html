@@ -55,10 +55,11 @@
 
 <hr>
 <h2>Handle loading States With &#64;If</h2>
-<button (click)="getload()">Get Loading State</button>
+<button (click)="getload()">Load State</button>
+
 <div *ngIf="isload">
     <p>Loading...</p>
 </div>
 <div *ngIf="!isload">
-    <p>Data loaded</p>
+    <p>Data loaded.</p>
 </div>

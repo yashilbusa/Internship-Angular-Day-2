@@ -81,7 +81,7 @@ export class AppComponent {
     usersapi = this.apiService.getUsers();
     constructor(private apiService: UserService) {}
 
-    isload = true; 
+    isload = true;
   
       getload() { 
           setInterval(()=>{
