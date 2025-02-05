@@ -1,11 +1,11 @@
-<!-- <h1>App Component</h1>
-<app-user></app-user>
-<app-joke></app-joke> -->
+<!-- <h1>App Component</h1> -->
+<!-- <app-user></app-user> -->
+<!-- <app-joke></app-joke> -->
 
-<!-- <input type="text" #search >
+<!-- <input type="text" #search > -->
 
-<h2>Async Pipe</h2>
-
+<!-- <h2>Async Pipe</h2> -->
+<!-- 
 <div *ngIf ="user | async as user ">
     <p>Name - {{ user.name }}</p>
     <p>Email - {{ user.email }}</p>
@@ -16,8 +16,8 @@
     <p>Id - {{i.id}} , Name - {{i.name}} , Salary - {{i.salary}}</p>  
 }
 
-<hr>
 
+<hr>
 <h2>Using Custom Pipe, Sort With Respect to Salary in Ascending Order</h2>
 <div>
     <li *ngFor="let i of users | sortPipe ;  trackBy: trackById">
@@ -25,8 +25,8 @@
     </li>
 </div>
 
-<hr>
 
+<hr>
 <h2>Using Custom Pipe, Filter Doing Name in Uppercase</h2>
 <div>
     <li *ngFor="let i of users | filterPipe ">
@@ -34,6 +34,31 @@
     </li>
 </div>
 
+
 <hr>
+<h2>Fetch Data from Json Api Holder</h2>
 <app-data></app-data>
 
+
+<hr>
+<h2>Display Users Using &#64;For & Async Pipe</h2>
+<div *ngIf="usersapi | async as userapi">
+    <ul>
+      <li *ngFor="let i of userapi">
+        <p>{{ i.name }}</p>
+        <p>{{ i.email }}</p>
+        <p>{{ i.phone }}</p>
+      </li>
+    </ul>
+</div>
+
+
+<hr>
+<h2>Handle loading States With &#64;If</h2>
+<button (click)="getload()">Get Loading State</button>
+<div *ngIf="isload">
+    <p>Loading...</p>
+</div>
+<div *ngIf="!isload">
+    <p>Data has loaded!</p>
+</div>

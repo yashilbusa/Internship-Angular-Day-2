@@ -5,16 +5,17 @@ import { JokeComponent } from './components/joke/joke.component';
 import { fromEvent, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators'
-import { UserService } from './services/user.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { SortPipePipe } from "./pipes/sort-pipe.pipe";
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { DataComponent } from './components/data/data.component';
+import { UserService } from './services/user.service';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SortPipePipe, FilterPipePipe,DataComponent],
+  imports: [CommonModule, SortPipePipe, FilterPipePipe, DataComponent],
   // imports: [UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -76,4 +77,15 @@ export class AppComponent {
     trackById(index:number, i:any){
       return i.id;
     }
+
+    usersapi = this.apiService.getUsers();
+    constructor(private apiService: UserService) {}
+
+    isload = true; 
+  
+      getload() { 
+          setInterval(()=>{
+            this.isload = false; 
+          },2000)
+      }
 }
