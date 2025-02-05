@@ -3,7 +3,16 @@
 <!-- <app-joke></app-joke> -->
 
 <input type="text" #search >
+<!-- <div>
+    <div *ngFor="let i of gitUsers">
+        <img [src]= "i.avatar_url" />
+        <p>{{i.login}}</p>
+        
+    </div>
+</div> -->
 
+
+<hr>
 <h2>Display Users using &#64;For </h2>
 @for (i of users; track i.id) {
     <p>Id - {{i.id}} , Name - {{i.name}} , Salary - {{i.salary}}</p>  

@@ -4,7 +4,7 @@ import { UserComponent } from './components/user/user.component';
 import { JokeComponent } from './components/joke/joke.component';
 import { fromEvent, of } from 'rxjs';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators'
+import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators'
 import { ajax } from 'rxjs/ajax';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { SortPipePipe } from "./pipes/sort-pipe.pipe";
@@ -26,15 +26,23 @@ export class AppComponent {
     @ViewChild('search',{static:true}) 
     search?:ElementRef<HTMLInputElement>
 
+    gitUsers =  []
+
     ngOnInit() {
 
-     const searchobj =  fromEvent(this.search!.nativeElement,"change")
+     const searchobj =  fromEvent(this.search!.nativeElement,"input")
      .pipe(
-      map((input:any)=>{
+      debounceTime(1000),
+      filter((e:any)=>e.target.value!==""),
+      switchMap((input:any)=>{
         return ajax(`https://api.github.com/search/users?q=${input.target.value}`)
-      })
+      }),
+      map((res:any)=>res.response.items)
      )
-     searchobj.subscribe((value:any)=>console.log(value))
+     searchobj.subscribe((value:any)=>{
+      console.log(value)
+      this.gitUsers = value
+     })
       
       // const numbers = of(1, 2, 3, 4, 5);
       // const evenNumbers = numbers.pipe(filter((x) => x % 2 !== 0));
