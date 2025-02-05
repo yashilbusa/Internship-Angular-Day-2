@@ -84,8 +84,8 @@ export class AppComponent {
       return i.id;
     }
 
-    usersapi = this.apiService.getUsers();
     constructor(private apiService: UserService) {}
+    usersapi = this.apiService.getUsers();
 
     isload = true;
   
