@@ -15,11 +15,7 @@ export class DataComponent {
 
   data = ""
 
-  ngOnInit() {
-    this.getData()
-  }
-
-  getData(){
+  ngOnInit(){
     this.dataservice.getPosts().subscribe((d:any)=>{
       this.data = d
     })
