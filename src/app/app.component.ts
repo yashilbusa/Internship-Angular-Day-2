@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 // import { RouterOutlet } from '@angular/router';
 import { UserComponent } from './components/user/user.component';
 import { JokeComponent } from './components/joke/joke.component';
@@ -11,6 +11,7 @@ import { SortPipePipe } from "./pipes/sort-pipe.pipe";
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { DataComponent } from './components/data/data.component';
 import { UserService } from './services/user.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -84,8 +85,8 @@ export class AppComponent {
       return i.id;
     }
 
-    constructor(private apiService: UserService) {}
-    usersapi = this.apiService.getUsers();
+    // constructor(private apiService: UserService) {}
+    // usersapi = this.apiService.getUsers();
 
     isload = true;
   
@@ -93,5 +94,13 @@ export class AppComponent {
           setInterval(()=>{
             this.isload = false; 
           },2000)
+      }
+
+      http = inject(HttpClient)
+      constructor(){
+        this.http.get(`https://jsonplaceholder.typicode.com/users`)
+        .subscribe((res: any)=>{
+          console.log(res);
+        })
       }
 }
