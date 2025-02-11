@@ -12,5 +12,5 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(),
     provideHttpClient(withFetch()),
-    provideHttpClient(withInterceptors([loggerInterceptor]))]
+    provideHttpClient(withInterceptors([loggerInterceptor]))],
 };

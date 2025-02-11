@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SortPipePipe, FilterPipePipe, DataComponent],
+  imports: [CommonModule, SortPipePipe, FilterPipePipe],
   // imports: [UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
